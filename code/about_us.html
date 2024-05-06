@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width initial-scale=1">
+
+	<link rel="stylesheet" type="text/css" href="cards.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+	<title>Responsive cards</title>
+  <style>
+    *{
+	margin: 0;
+	padding: 0;
+}
+body{
+	font-family: sans-serif;
+	font-size: 14px;
+	font-weight: 400;
+	color: #777;
+}
+h1{
+	font-size: 36px;
+	color: #555;
+	font-weight: bold;
+}
+h3{
+	font-size: 24px;
+	color: #333;
+	font-weight: bold;
+}
+
+#team img{
+	margin-top: -50px;
+}
+#team i{
+	font-size: 26px;
+	color: #555;
+}
+
+#team p{
+	font-weight: 500;
+}
+
+#team .card{
+	border-radius: 0;
+	box-shadow: 5px 5px 15px #e74c3c;
+	transition: all 0.3s ease-in;
+  height:
+}
+
+#team .card:hover{
+	background-color: #e74c3c;
+	color: #fff;
+	border-radius: 5px;
+	border:none;
+	box-shadow: 5px 5px 15px #9E9E9E;
+}
+
+#team .card:hover h3, #team .card:hover i{
+	color: #fff;
+}
+
+  </style>
+</head>
+<body>
+
+	<section id="team">
+		<div class="container text-center my-3 py-5"><!--my is for margin-top and margin-bottom  my-3 py-5-->
+			<div class="row">
+				<div class="col">
+					<h1>Our Team</h1>
+					<p class="mt-3">It is a long established fact that a reader will be distracted by the readable content of a page when lokking at it's layout</p>
+				</div>
+			</div>
+
+			<div class="row ">
+				<div class="col-lg-3 col-md-6">
+					<div class="card my-5">
+						<div class="card-body">
+							<img src="../images/New folder/aryan_me.jpg" alt="img" class="img-fluid rounded-circle mb-3 w-50"><!--This ensures that the image scales to the parent element.-->
+							<h3>Aryan Verma</h3>
+							<h5 class="mb-3">Web designer</h5>
+							<p>"Hello!! <br>
+                I m Aryan!I m a web designer and i like to play with html and css "</p>
+
+							<div class="d-flex flex-row justify-content-center">
+								<div class="p-4">
+									<a href="#">
+										<i class="fab fa-facebook-f"></i>
+									</a>
+								</div>
+								<div class="p-4">
+									<a href="#">
+										<i class="fab fa-twitter"></i>
+									</a>
+								</div>
+								<div class="p-4">
+									<a href="#">
+										<i class="fab fa-instagram"></i>
+									</a>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+
+
+				<div class="col-lg-3 col-md-6">
+					<div class="card my-5">
+						<div class="card-body">
+							<img src="../images/New folder/WhatsApp Image 2023-12-11 at 00.43.42_0a30c1ed.jpg" alt="imag" class="img-fluid rounded-circle mb-3 w-50"><!--This ensures that the image scales to the parent element.-->
+							<h3>Ashita</h3>
+							<h5 class="mb-3">Senior Designer</h5>
+							<p><br>
+                I'm Ashita, senior designer in this company ,"patience is the key!"<br>
+                  </p>
+
+							<div class="d-flex flex-row justify-content-center">
+								<div class="p-4">
+									<a href="#">
+										<i class="fab fa-facebook-f"></i>
+									</a>
+								</div>
+								<div class="p-4">
+									<a href="#">
+										<i class="fab fa-twitter"></i>
+									</a>
+								</div>
+								<div class="p-4">
+									<a href="#">
+										<i class="fab fa-instagram"></i>
+									</a>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+
+				<div class="col-lg-3 col-md-6">
+					<div class="card my-5">
+						<div class="card-body">
+							<img src="../images/New folder/Screenshot 2023-12-11 004744.png" alt="imag" class="img-fluid rounded-circle mb-3 w-50"><!--This ensures that the image scales to the parent element.-->
+							<h3>Aryan Rana </h3>
+							<h5 class="mb-3">Backend Engineer</h5>
+							<p>I'm Aryan Rana,Backend Engineer in this company , "Logic is the Prior thing !"</p>
+
+							<div class="d-flex flex-row justify-content-center">
+								<div class="p-4">
+									<a href="#">
+										<i class="fab fa-facebook-f"></i>
+									</a>
+								</div>
+								<div class="p-4">
+									<a href="#">
+										<i class="fab fa-twitter"></i>
+									</a>
+								</div>
+								<div class="p-4">
+									<a href="#">
+										<i class="fab fa-instagram"></i>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- <div class="col-lg-3 col-md-6"> -->
+					<!-- <div class="card my-5"> -->
+						<!-- <div class="card-body"> -->
+							<!-- <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRFZjv92g6mmya45ITzoIdMFS7oATPmFEYWwQ&usqp=CAU" alt="imag" class="img-fluid rounded-circle mb-3 w-50">This ensures that the image scales to the parent element. -->
+							<!-- <h3>Ajax Json</h3> -->
+							<!-- <h5 class="mb-3">Junior Developer</h5> -->
+							<!-- <p>I'm Junior Developer, Junior developer in this company since 2 years,"practice practise!"</p> -->
+<!--  -->
+							<!-- <div class="d-flex flex-row justify-content-center"> -->
+								<!-- <div class="p-4"> -->
+									<!-- <a href="#"> -->
+										<!-- <i class="fab fa-facebook-f"></i> -->
+									<!-- </a> -->
+								<!-- </div> -->
+								<!-- <div class="p-4"> -->
+									<!-- <a href="#"> -->
+										<!-- <i class="fab fa-twitter"></i> -->
+									<!-- </a> -->
+								<!-- </div> -->
+								<!-- <div class="p-4"> -->
+									<!-- <a href="#"> -->
+										<!-- <i class="fab fa-instagram"></i> -->
+									<!-- </a> -->
+								<!-- </div> -->
+							<!-- </div> -->
+						<!-- </div> -->
+					<!-- </div> -->
+				<!-- </div> -->
+
+
+			</div>
+		</div>
+	</section>
+
+</body>
+</html>
