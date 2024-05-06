@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bookstore</title>
+
+
+    <!-- swiper css sheet+ -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+
+  <!-- cloudfare link sheet+ -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+
+    <style>
+      #add-to-cart{
+        
+        margin-top: 1rem;
+        display: inline-block;
+        padding: .9rem 3rem;
+        border-radius: .5rem;
+        color: #fff;
+        background:var(--green) ;
+        font-size: 1.76rem;
+        cursor: pointer;
+        font-weight: 500;
+      }
+    
+        #add-to-cart:hover{
+        background-color: var(--dark-color);
+          }
+                
+    
+    
+            
+    
+          
+    
+          .cart-btn {
+            position: relative;
+            display: flex;
+            justify-content: flex-end;
+          }
+    
+          cart {
+            position: relative;
+            font-size: 2rem;
+            cursor: pointer;
+            margin: 1em 4em 0 0;
+          }
+    
+          .cart-quantity {
+            color: white;
+            background-color: rgb(0, 255, 17);
+            padding: .2rem .3rem;
+            position: absolute;
+            margin: -1.2rem 19em .9rem 0;
+            right: 0;
+            border: solid 2px rgb(0, 255, 47);
+            border-radius: 15px;
+            font-weight: bolder;
+          }
+    
+          .items-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            margin-top: 1em
+          }
+    
+          .card {
+          /*   width: 15rem; */
+            margin: 1em;
+            position: relative;
+            overflow: hidden;
+            text-align: center
+          }
+    
+          .card:hover .add-to-cart {
+            transform: translateX(0);
+          }
+    
+          .product-image {
+            margin-bottom: 1em
+          }
+    
+          add-to-cart {
+            background-color: black;
+            color: white;
+            position: absolute;
+            right: 0;
+            top: 65%;
+            padding: .5em 1em;
+            transform: translateX(300px);
+            transition: .5s ease;
+            outline: none;
+            border: none;
+            cursor: pointer;
+            font-weight: bolder;
+            font-size: 1.2rem
+          }
+    
+          .product-price {
+            padding-top: 1em;
+            font-weight: bold;
+            font-size: 1.5rem;
+          }
+    
+          .cart-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, .5);
+            z-index: 2;
+            transform: translateX(-200%);
+            transition: .5s ease-out;
+    
+          }
+    
+          .cart-modal {
+            height: 100vh;
+            width: 50%;
+            background-color: rgb(50,50,50);
+            float: right;
+            overflow: scroll;
+            overflow-x: hidden;
+          }
+    
+          #close-btn {
+            font-size: 1.5rem;
+            float: right;
+            margin: .5em 2em 0 0;
+            color: white;
+            cursor: pointer;
+          }
+    
+          .cart-is-empty {
+            color: white;
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 1em;
+            display: none;
+    
+          }
+    
+          .total {
+            text-align: center;
+            margin: 2em 0 2em 0;
+          /*   display: none; */
+          }
+    
+          .cart-total {
+            color: white;
+          }
+    
+          .total-price {
+            color: white;
+            font-size: 2rem;
+            display: block;
+          }
+    
+          .purchase-btn {
+            font-size: 1rem;
+            font-weight: bolder;
+            background-color: green;
+            color: white;
+            padding: 1em 2em;
+            border-radius: 10px;
+            outline: none;
+            border: none;
+            cursor: pointer;
+            margin: 2em 0 1em 0;
+          }
+    
+          .product-rows {
+            margin-top: 3em;
+            width: 95%;
+            margin-left: auto;
+            margin-right: auto;
+    
+          }
+    
+          .product-row {
+            display: flex;
+            align-items: center;
+          }
+    
+          .cart-image {
+            width: 10rem;
+            margin: 1em;
+          }
+    
+          .cart-price {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bolder;
+          }
+    
+          .product-quantity {
+            width: 4rem;
+            font-size: 2rem;
+            margin-left: 3rem;
+          }
+    
+          .remove-btn {
+            padding: 1em 2em;
+            background-color: red;
+            color: white;
+            outline: none;
+            border: none;
+            cursor: pointer;
+            margin-left: 3rem;
+            font-weight: bolder;
+            font-size: 1rem;
+          }
+    
+          .remove-btn:active {
+            transform: translateY(5px);
+          }
+
+
+          
+    
+          @media (max-width: 1000px){
+            .cart-modal {
+              width: 100vw;
+            }
+    
+            .product-row {
+              flex-direction: column;
+              text-align: center;
+              margin-bottom: 2em;
+            }
+    
+            .remove-btn {
+              margin: 0
+            }
+    
+            .product-quantity {
+              margin: .5em 0 .5em 0
+            }
+    
+            .cart-quantity{
+              margin: -1.2rem 8rem .9rem 0;
+    
+            }
+          }
+
+          /* loader*/
+      
+
+
+    
+    </style>
+
+  
+  </head>
+  <body>
+
+
+
+     <!--header-->
+    <header class="header">
+      <div class="header-1">
+        <a href="" class="logo"><i class="fas fa-book"></i>Bookily</a>
+        <form action="" class="search-form">
+          <input
+            type="search"
+            name=""
+            placeholder="search here..."
+            id="search-box"
+          />
+          <label for="search-box" class="fas fa-search"></label>
+        </form>
+
+        <div class="icons">
+          <div id="search-btn" class="fas fa-search"></div>
+          <a id="cart" class="fas fa-shopping-cart"></a>
+          <span class="cart-quantity">0</span>
+          <a href="" class="fas fa-heart"></a>
+          <div id="login-btn" class="fas fa-user"></div>
+        </div>
+      </div>
+
+      <div class="header-2">
+        <nav class="navbar">
+          <a href="#home">Home</a>
+          <a href="#arrivals">Arrivals</a>
+          <a href="#featured">Featured</a>
+          <a href="blog.html">Blogs</a>
+          <a href="chatbot.html">Contact</a>
+        </nav>
+      </div>
+    </header>
+    <!-- header ends here -->
+
+
+
+
+
+    <!-- bottom nav bar -->
+
+    <nav class="bottom-navbar">
+      <a href="#home" class="fas fa-home"></a>
+      <a href="#arrivals" class="fas fa-list"></a>
+      <a href="#featured" class="fas fa-tags"></a>
+      <a href="chatbot.html" class="fas fa-comments"></a>
+      <a href="chatbot.html" class="fas fa-blogs"></a>
+    </nav>
+
+
+
+
+    <!-- Login form+ -->
+    <div class="login-form-container">
+      <div id="close-login-btn" class="fas fa-times"></div>
+      <form action="">
+        <h3>sign in</h3>
+        <span>username</span>
+        <input
+          type="email"
+          name=""
+          class="box"
+          placeholder="enter your email"
+          id=""
+        />
+        <span>password</span>
+        <input
+          type="password"
+          name=""
+          class="box"
+          placeholder="enter your password"
+          id=""
+        />
+        <div class="checkbox">
+          <input type="checkbox" name="" id="remember-me" />
+          <label for="remember-me">remember-me</label>
+        </div>
+        <input type="submit" value="sign in" class="btn" />
+        <p>forget password ? <a href="#">click here </a></p>
+        <p>dont have an account ? <a href="#">create one </a></p>
+      </form>
+    </div>
+
+
+      <!-- cart model here -->
+
+      <div class="cart-modal-overlay">
+        <div class="cart-modal">
+          <i id="close-btn" class="fas fa-times"></i>
+          <h1 class="cart-is-empty">Cart is empty</h1>
+
+          <div class="product-rows"></div>
+          <div class="total">
+            <h1 class="cart-total">TOTAL</h1>
+            <span class="total-price">$0</span>
+            <button class="purchase-btn">PURCHASE</button>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- cart model ends here -->
+
+    <!-- home section here -->
+    <section class="home" id="home">
+      <div class="row">
+        <div class="content">
+          <h3>upto 75% off</h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            
+          </p>
+          <a href="#" class="btn">shop now</a>
+        </div>
+
+        <div class="swiper books-slider">
+            <div class="swiper-wrapper">
+                <a href="product_view.html" class="swiper-slide"><img src="../images/book1.jpg" alt="" ></a> 
+                <a href="product_view.html" class="swiper-slide"><img src="../images/same_size/book2.jpg" alt="" ></a>
+                <a href="product_view.html" class="swiper-slide"><img src="../images/book3.jpg" alt="" ></a> 
+                <a href="product_view.html" class="swiper-slide"><img src="../images/same_size/book4.jpg" alt="" ></a>
+                <a href="product_view.html" class="swiper-slide"><img src="../images/same_size/book5.jpg" alt="" ></a>
+                <a href="product_view.html" class="swiper-slide"><img src="../images/same_size/book6.jpg" alt="" ></a>
+            </div>
+            <img src="../images/images/shelf.png" class="stand" alt="">
+        </div>
+      </div>
+    </section>
+      <!-- home section ends here -->
+
+
+
+
+      <!-- ions section starts here -->
+    <section class="icons-container">
+
+        <div class="icons">
+
+          <i class="fas fa-plane"></i>
+          <div class="content">
+            <h3>free Shipping</h3>
+            <p>order over $10</p>
+          </div>
+
+          <i class="fas fa-lock"></i>
+          <div class="content">
+            <h3>security</h3>
+            <p>100% secure payment</p>
+          </div>
+
+          <i class="fas fa-redo-alt"></i>
+          <div class="content">
+            <h3>easy returns</h3>
+            <p>10 days returns</p>
+          </div>
+
+        </div>
+
+    </section>
+      
+
+      <!-- icons sec ends here -->
+
+
+
+
+      <!-- featured section starts here -->
+
+
+      <section class="featured" id="featured">
+
+        <h1 class="heading"><span>featured books</span></h1>
+  
+        <div class="swiper featured-slider">
+  
+          <div class="swiper-wrapper">
+  
+  
+              <!-- book one -->
+            <div class="swiper-slide box">
+  
+              <div class="icons">
+                <a href="#" class="fa fa-search"></a>
+                <a href="#" class="fa fa-heart"></a>
+                <a href="product_view.html" class="fa fa-eye"></a>
+  
+              </div>
+              <div class="image">
+                <img class="product-image" src="../images/same_size/book2.jpg" alt="">
+              </div>
+  
+              <div class="content">
+                <h3>featured books</h3>
+                <div class="price">&#8377;300 <s>&#8377;500</s></div>
+  
+                <a href="#" id="add-to-cart" class="add-to-cart" >add to cart</a>
+  
+              </div>
+  
+            </div>
+  
+  
+              <!-- book 2 -->
+            <div class="swiper-slide box">
+  
+              <div class="icons">
+                <a href="#" class="fa fa-search"></a>
+                <a href="#" class="fa fa-heart"></a>
+                <a href="#" class="fa fa-eye"></a>
+  
+              </div>
+              <div class="image">
+                <img class="product-image" src="../images/same_size/book4.jpg" alt="">
+              </div>
+  
+              <div class="content">
+                <h3>featured books</h3>
+                <div  class="price">&#8377;300 <s>&#8377;500</s></div>
+  
+                <a href="#" id="add-to-cart" class="add-to-cart"  >add to cart</a>
+  
+              </div>
+  
+            </div>
+  
+            <!-- book 3 -->
+            <div class="swiper-slide box">
+  
+              <div class="icons">
+                <a href="#" class="fa fa-search"></a>
+                <a href="#" class="fa fa-heart"></a>
+                <a href="#" class="fa fa-eye"></a>
+  
+              </div>
+              <div class="image">
+                <img class="product-image" src="../images/same_size/book5.jpg" alt="">
+              </div>
+  
+              <div class="content">
+                <h3>featured books</h3>
+                <div class="price">&#8377;300 <s>&#8377;500</s></div>
+  
+                <a href="#" id="add-to-cart" class="add-to-cart"  >add to cart</a>
+  
+              </div>
+  
+            </div>
+  
+            <!-- book 4 -->
+            <div class="swiper-slide box">
+  
+              <div class="icons">
+                <a href="#" class="fa fa-search"></a>
+                <a href="#" class="fa fa-heart"></a>
+                <a href="#" class="fa fa-eye"></a>
+  
+              </div>
+              <div class="image">
+                <img class="product-image" src="../images/book1.jpg" alt="">
+              </div>
+  
+              <div class="content">
+                <h3>featured books</h3>
+                <div class="price">&#8377;300 <s>&#8377;500</s></div>
+  
+                <a href="#" id="add-to-cart" class="add-to-cart"  >add to cart</a>
+  
+              </div>
+  
+            </div>
+            <!-- ends here -->
+  
+            <!-- book 5 -->
+            <div class="swiper-slide box">
+  
+              <div class="icons">
+                <a href="#" class="fa fa-search"></a>
+                <a href="#" class="fa fa-heart"></a>
+                <a href="#" class="fa fa-eye"></a>
+  
+              </div>
+              <div class="image">
+                <img class="product-image" src="../images/book3.jpg" alt="">
+              </div>
+  
+              <div class="content">
+                <h3>featured books</h3>
+                <div class="price">&#8377;300 <s>&#8377;500</s></div>
+  
+                <a href="#" id="add-to-cart" class="add-to-cart" >add to cart</a>
+  
+              </div>
+  
+            </div>
+  
+            <!-- ends here -->
+  
+  
+              <!-- book 6 -->
+            <div class="swiper-slide box">
+  
+              <div class="icons">
+                <a href="#" class="fa fa-search"></a>
+                <a href="#" class="fa fa-heart"></a>
+                <a href="#" class="fa fa-eye"></a>
+  
+              </div>
+              <div class="image">
+                <img class="product-image" src="../images/same_size/book2.jpg" alt="">
+              </div>
+  
+              <div class="content">
+                <h3>featured books</h3>
+                <div class="price">&#8377;300 <s>&#8377;500</s></div>
+  
+                <a href="#" id="add-to-cart" class="add-to-cart"  >add to cart</a>
+  
+              </div>
+  
+            </div>
+              <!-- ends here -->
+            
+              <!-- books 7 -->
+              <div class="swiper-slide box">
+  
+                <div class="icons">
+                  <a href="#" class="fa fa-search"></a>
+                  <a href="#" class="fa fa-heart"></a>
+                  <a href="#" class="fa fa-eye"></a>
+  
+                </div>
+                <div class="image">
+                  <img class="product-image" src="../images/Uzumaki.jpg" alt="">
+                </div>
+  
+                <div class="content">
+                  <h3>featured books</h3>
+                  <div class="price">&#8377;300 <s>&#8377;500</s></div>
+  
+                  <a href="#" id="add-to-cart" class="add-to-cart"  >add to cart</a>
+  
+                </div>
+  
+              </div>
+              <!-- ends here -->
+  
+              <!-- book 8 -->
+              <div class="swipe-slide box">
+  
+                <div class="icons">
+                  <a href="#" class="fa fa-search"></a>
+                  <a href="#" class="fa fa-heart"></a>
+                  <a href="#" class="fa fa-eye"></a>
+  
+                </div>
+                <div class="image">
+                  <img class="product-image" src="../images/blue lock.jpg" alt="">
+                </div>
+  
+                <div class="content">
+                  <h3>featured books</h3>
+                  <div class="price">&#8377;300 <s>&#8377;500</s></div>
+  
+                  <a href="#" id="add-to-cart" class="add-to-cart"  >add to cart</a>
+  
+                </div>
+  
+              </div>
+              <!-- ends here -->
+  
+              <!-- book 9+ -->
+              <div class="swipe-slide box">
+  
+                <div class="icons">
+                  <a href="#" class="fa fa-search"></a>
+                  <a href="#" class="fa fa-heart"></a>
+                  <a href="#" class="fa fa-eye"></a>
+  
+                </div>
+                <div class="image">
+                  <img class="product-image" src="../images/bestsellers/shrimad bhagwat geeta.jpg" alt="">
+                </div>
+  
+                <div class="content">
+                  <h3>featured books</h3>
+                  <div class="price">&#8377;300 <s>&#8377;500</s></div>
+  
+                  <a href="#" id="add-to-cart" class="add-to-cart"  >add to cart</a>
+  
+                </div>
+  
+              </div>
+              <!-- end here++ -->
+  
+              <!-- book 10 -->
+              <div class="swipe-slide box">
+  
+                <div class="icons">
+                  <a href="#" class="fa fa-search"></a>
+                  <a href="#" class="fa fa-heart"></a>
+                  <a href="#" class="fa fa-eye"></a>
+  
+                </div>
+                <div class="image">
+                  <img class="product-image" src="../images/bestsellers/Thehumgergames.jpg" alt="">
+                </div>
+  
+                <div class="content">
+                  <h3>featured books</h3>
+                  <div class="price">&#8377;300 <s>&#8377;500</s></div>
+  
+                  <a href="#" id="add-to-cart" class="add-to-cart"  >add to cart</a>
+  
+                </div>
+  
+              </div>
+              <!-- ends here+ -->
+  
+          </div>
+            <!-- nav bar -->
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+  
+        </div>
+  
+      </section>
+
+
+      <!-- featured ends here -->
+
+
+
+
+
+
+        <!-- arrivals section starts here -->
+
+
+        <section class="arrivals" id="arrivals">
+
+          <h1 class="heading"><span>Arrivals</span></h1>
+  
+          <div class="swiper featured-slider">
+  
+            <div class="swiper-wrapper">
+                
+  
+  
+                <!-- book 2 -->
+              <div class="swiper-slide box">
+  
+                <div class="icons">
+                  <a href="#" class="fa fa-search"></a>
+                  <a href="#" class="fa fa-heart"></a>
+                  <a href="#" class="fa fa-eye"></a>
+  
+                </div>
+                <div class="image">
+                  <img src="../images/same_size/book4.jpg" alt="">
+                </div>
+  
+                <div class="content">
+                  <h3>featured books</h3>
+                  <div class="price">&#8377;300 <s>&#8377;500</s></div>
+  
+                  <a href="#" class="btn" >add to cart</a>
+  
+                </div>
+  
+              </div>
+  
+              <!-- book 3 -->
+              <div class="swiper-slide box">
+  
+                <div class="icons">
+                  <a href="#" class="fa fa-search"></a>
+                  <a href="#" class="fa fa-heart"></a>
+                  <a href="#" class="fa fa-eye"></a>
+  
+                </div>
+                <div class="image">
+                  <img src="../images/same_size/book5.jpg" alt="">
+                </div>
+  
+                <div class="content">
+                  <h3>featured books</h3>
+                  <div class="price">&#8377;300 <s>&#8377;500</s></div>
+  
+                  <a href="#" class="btn" >add to cart</a>
+  
+                </div>
+  
+              </div>
+  
+              <!-- book 4 -->
+              <div class="swiper-slide box">
+  
+                <div class="icons">
+                  <a href="#" class="fa fa-search"></a>
+                  <a href="#" class="fa fa-heart"></a>
+                  <a href="#" class="fa fa-eye"></a>
+  
+                </div>
+                <div class="image">
+                  <img src="../images/book1.jpg" alt="">
+                </div>
+  
+                <div class="content">
+                  <h3>featured books</h3>
+                  <div class="price">&#8377;300 <s>&#8377;500</s></div>
+  
+                  <a href="#" class="btn" >add to cart</a>
+  
+                </div>
+  
+              </div>
+              <!-- ends here -->
+
+              <!-- book 8 -->
+              <div class="swipe-slide box">
+  
+                <div class="icons">
+                  <a href="#" class="fa fa-search"></a>
+                  <a href="#" class="fa fa-heart"></a>
+                  <a href="#" class="fa fa-eye"></a>
+  
+                </div>
+                <div class="image">
+                  <img src="../images/blue lock.jpg" alt="">
+                </div>
+  
+                <div class="content">
+                  <h3>featured books</h3>
+                  <div class="price">&#8377;300 <s>&#8377;500</s></div>
+  
+                  <a href="#" class="btn" >add to cart</a>
+  
+                </div>
+  
+              </div>
+              <!-- ends here -->
+  
+              <!-- book 5 -->
+              <div class="swiper-slide box">
+  
+                <div class="icons">
+                  <a href="#" class="fa fa-search"></a>
+                  <a href="#" class="fa fa-heart"></a>
+                  <a href="#" class="fa fa-eye"></a>
+  
+                </div>
+                <div class="image">
+                  <img src="../images/book3.jpg" alt="">
+                </div>
+  
+                <div class="content">
+                  <h3>featured books</h3>
+                  <div class="price">&#8377;300 <s>&#8377;500</s></div>
+  
+                  <a href="#" class="btn">add to cart</a>
+  
+                </div>
+  
+              </div>
+  
+              <!-- ends here -->
+  
+  
+                <!-- book 6 -->
+              <div class="swiper-slide box">
+  
+                <div class="icons">
+                  <a href="#" class="fa fa-search"></a>
+                  <a href="#" class="fa fa-heart"></a>
+                  <a href="#" class="fa fa-eye"></a>
+  
+                </div>
+                <div class="image">
+                  <img src="../images/same_size/book2.jpg" alt="">
+                </div>
+  
+                <div class="content">
+                  <h3>featured books</h3>
+                  <div class="price">&#8377;300 <s>&#8377;500</s></div>
+  
+                  <a href="#" class="btn" >add to cart</a>
+  
+                </div>
+  
+              </div>
+                <!-- ends here -->
+              
+                <!-- books 7 -->
+                <div class="swiper-slide box">
+  
+                  <div class="icons">
+                    <a href="#" class="fa fa-search"></a>
+                    <a href="#" class="fa fa-heart"></a>
+                    <a href="#" class="fa fa-eye"></a>
+    
+                  </div>
+                  <div class="image">
+                    <img src="../images/Uzumaki.jpg" alt="">
+                  </div>
+    
+                  <div class="content">
+                    <h3>featured books</h3>
+                    <div class="price">&#8377;300 <s>&#8377;500</s></div>
+    
+                    <a href="#" class="btn" >add to cart</a>
+    
+                  </div>
+    
+                </div>
+                <!-- ends here -->
+  
+                
+  
+                <!-- book 9+ -->
+                <div class="swipe-slide box">
+  
+                  <div class="icons">
+                    <a href="#" class="fa fa-search"></a>
+                    <a href="#" class="fa fa-heart"></a>
+                    <a href="#" class="fa fa-eye"></a>
+    
+                  </div>
+                  <div class="image">
+                    <img src="../images/bestsellers/shrimad bhagwat geeta.jpg" alt="">
+                  </div>
+    
+                  <div class="content">
+                    <h3>featured books</h3>
+                    <div class="price">&#8377;300 <s>&#8377;500</s></div>
+    
+                    <a href="#" class="btn" >add to cart</a>
+    
+                  </div>
+    
+                </div>
+                <!-- end here++ -->
+  
+                
+  
+            </div>
+              <!-- nav bar -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+  
+          </div>
+  
+        </section>
+
+
+        <!-- footer starts here -->
+        <section class="footer">
+          <div class="box-container">
+
+
+            <div class="box">
+
+              <h3>our locations</h3>
+              <a href="#"><i class="fas fa-plane"></i>India</a>
+              <a href="#"><i class="fas fa-plane"></i>America</a>
+              <a href="#"><i class="fas fa-plane"></i>Russia</a>
+              <a href="#"><i class="fas fa-plane"></i>france</a>
+              <a href="#"><i class="fas fa-plane"></i>japan</a>
+            </div>
+
+            <div class="box">
+
+              <h3>links</h3>
+              <a href="#home"><i class="fas fa-arrow-right"></i>home</a>
+              <a href="#featured"><i class="fas fa-arrow-right"></i>featured</a>
+              <a href="#arrivals"><i class="fas fa-arrow-right"></i>arrivals</a>
+              <a href="contact form.html"><i class="fas fa-arrow-right"></i>Contact</a>
+              <a href="../project2.0/blog.html"><i class="fas fa-arrow-right"></i>blogs</a>
+
+            </div>
+
+            
+            <div class="box">
+              <h3>extra links</h3>
+              <a href="#"><i class="fas fa-arrow-right"></i>account info</a>
+              <a href="#"><i class="fas fa-arrow-right"></i>ordered items</a>
+              <a href="#"><i class="fas fa-arrow-right"></i>privacy policy</a>
+               <a href="./new_add.html"><i class="fas fa-arrow-right"></i>About Us</a> 
+              <a href="#"><i class="fas fa-arrow-right"></i>our services</a>
+
+            </div>
+
+            <div class="box">
+
+              <h3>contact info</h3>
+              <a href="#"><i class="fas fa-phone"></i>+123-45</a>
+              <a href="#"><i class="fas fa-phone"></i>+111-222</a>
+              <a href="#"><i class="fas fa-envelope"></i>iybooks</a>
+              <!-- <img src="../images/images/5vpTg.png " class="map"> -->
+              
+
+            </div>
+
+            
+
+           
+
+          </div>
+          <div class="share">
+              <a href="#"class="fab fa-facebook"></a>
+              <a href="#"class="fab fa-twitter"></a>
+              <a href="#"class="fab fa-instagram"></a>
+              <a href="#"class="fab fa-linkedin"></a>
+              <a href="#"class="fab fa-pinterest"></a>
+            </div>
+        </section>
+
+        <!-- loader -->
+
+        <div class="loader-container">
+          <div class="spinner"></div>
+        </div>
+
+    <!-- custom script -->
+    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+    <script defer>
+
+
+
+      //loader
+      const loaderContainer = document.querySelector(".loader-container");
+      window.addEventListener("load", () => {
+        // ...
+      });
+
+      window.addEventListener("load", () => {
+        loaderContainer.style.display = "none";
+      });
+
+      window.addEventListener('load', () => {
+    loaderContainer.classList.add('loader-container-hidden');
+});
+
+      // js for responsive search bar
+      searchForm = document.querySelector(".search-form");
+
+      document.querySelector("#search-btn").onclick = () => {
+        searchForm.classList.toggle("active");
+      };
+
+
+      // js for responsive login page
+      let loginForm = document.querySelector(".login-form-container");
+
+      document.querySelector("#login-btn").onclick = () => {
+        loginForm.classList.toggle("active");
+
+        document.querySelector("#close-login-btn").onclick = () => {
+          loginForm.classList.remove("active");
+        };
+      };
+
+      // for cart
+      const cart = document.querySelector("#cart");
+      const cartModalOverlay = document.querySelector(".cart-modal-overlay");
+
+      cart.addEventListener("click", () => {
+        if (cartModalOverlay.style.transform === "translateX(-200%)") {
+          cartModalOverlay.style.transform = "translateX(0)";
+        } else {
+          cartModalOverlay.style.transform = "translateX(-200%)";
+        }
+      });
+      // end of open cart modal
+
+      // close cart modal
+      const closeBtn = document.querySelector("#close-btn");
+
+      closeBtn.addEventListener("click", () => {
+        cartModalOverlay.style.transform = "translateX(-200%)";
+      });
+
+      cartModalOverlay.addEventListener("click", (e) => {
+        if (e.target.classList.contains("cart-modal-overlay")) {
+          cartModalOverlay.style.transform = "translateX(-200%)";
+        }
+      });
+
+
+      // sliding animation+
+
+      var swiper = new Swiper(".books-slider", {
+        
+
+        loop:true,
+        centeredSlides:false,
+        autoplay: {
+          delay: 9500,
+          disableOnInteraction: false,
+
+        },
+
+        breakpoints: {
+          0: {
+            slidesPerView: 1,
+            // spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 2,
+            // spaceBetween: 40,
+          },
+          1024: {
+            slidesPerView: 1,
+            // spaceBetween: 20,
+          },
+        },
+
+        
+    });
+
+    // for featured sec+
+
+    var swiper = new Swiper(".featured-slider", {
+
+        
+        spaceBetween: 10,
+        loop:true,
+        centeredSlides:false,
+        autoplay: {
+          delay: 9500,
+          disableOnInteraction: false,
+
+        },
+
+        navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+
+        breakpoints: {
+          0: {
+            slidesPerView: 1,
+            // spaceBetween: 20,
+          },
+
+           450: {
+            slidesPerView: 1,
+            // spaceBetween: 20,
+          },
+
+
+          768: {
+            slidesPerView: 2,
+            // spaceBetween: 40,
+          },
+
+        
+
+          1024: {
+            slidesPerView: 3,
+            // spaceBetween: 20,
+          },
+        },
+
+
+      });
+
+
+      
+      //add to cart
+      const addToCart = document.getElementsByClassName("add-to-cart");
+
+  for (var i = 0; i < addToCart.length; i++) {
+    button = addToCart[i];
+    button.addEventListener("click", addToCartClicked);
+  }
+
+  function addToCartClicked(event) {
+    button = event.target;
+    var cartItem = button.parentElement.parentElement; // Adjusted to go up two levels
+    var price = cartItem.getElementsByClassName("price")[0].innerText; // Updated class name
+
+    var imageSrc = cartItem.getElementsByClassName("product-image")[0].src;
+    addItemToCart(price, imageSrc);
+    updateCartPrice();
+  }
+
+  function addItemToCart(price, imageSrc) {
+    var productRow = document.createElement("div");
+    productRow.classList.add("product-row");
+
+    var cartRowItems = `
+      <img class="cart-image" src="${imageSrc}" alt="">
+      <span class="cart-price">${price}</span>
+      <input class="product-quantity" type="number" value="1">
+      <button class="remove-btn">Remove</button>
+    `;
+
+    productRow.innerHTML = cartRowItems;
+
+    var productRows = document.getElementsByClassName("product-rows")[0];
+    productRows.appendChild(productRow);
+
+    productRow
+      .getElementsByClassName("remove-btn")[0]
+      .addEventListener("click", removeItem);
+    productRow
+      .getElementsByClassName("product-quantity")[0]
+      .addEventListener("change", changeQuantity);
+    updateCartPrice();
+  }
+
+  // Remove products from cart
+  function removeItem(event) {
+    var btnClicked = event.target;
+    btnClicked.parentElement.remove();
+    updateCartPrice();
+  }
+
+  // update quantity input
+  var quantityInput = document.getElementsByClassName("product-quantity");
+
+  for (var i = 0; i < quantityInput.length; i++) {
+    input = quantityInput[i];
+    input.addEventListener("change", changeQuantity);
+  }
+
+  function changeQuantity(event) {
+    var input = event.target;
+    if (isNaN(input.value) || input.value <= 0) {
+      input.value = 1;
+    }
+    updateCartPrice();
+  }
+
+  // update total price
+  function updateCartPrice() {
+    var total = 0;
+    var productRow = document.getElementsByClassName("product-row");
+
+    for (var i = 0; i < productRow.length; i++) {
+      var cartRow = productRow[i];
+      var priceElement = cartRow.getElementsByClassName("cart-price")[0];
+      var quantityElement = cartRow.getElementsByClassName("product-quantity")[0];
+      var price = parseFloat(priceElement.innerText.replace("₹", "")); // Updated currency symbol
+      var quantity = quantityElement.value;
+      total = total + price * quantity;
+    }
+
+    document.getElementsByClassName("total-price")[0].innerText = "₹" + total; // Updated currency symbol
+    document.getElementsByClassName("cart-quantity")[0].textContent = i;
+  }
+
+  // purchase items
+  const purchaseBtn = document.querySelector(".purchase-btn");
+
+  purchaseBtn.addEventListener("click", purchaseBtnClicked);
+
+  function purchaseBtnClicked() {
+    alert("Thank you for your purchase");
+    var cartItems = document.getElementsByClassName("product-rows")[0];
+    while (cartItems.hasChildNodes()) {
+      cartItems.removeChild(cartItems.firstChild);
+    }
+    updateCartPrice();
+  }
+
+      //end of close cart model
+
+
+
+      
+    </script>
+    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+  </body>
+</html>
+
