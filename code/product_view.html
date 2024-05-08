@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <!-- cloudfare link sheet+ -->
+     <link
+     rel="stylesheet"
+     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+   />
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+    --dark-cyan: hsl(158, 36%, 37%);
+    --cream: hsl(30, 38%, 92%);
+    --very-dark-blue: hsl(157, 30%, 24%);
+    --dark-grayish-blue: hsl(228, 12%, 48%);
+    --white: hsl(0, 0%, 100%);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--cream);
+    height: 100vh;
+    width: 100%;
+}
+
+main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+main .card {
+    width: 600px;
+    background-color: var(--white);
+    display: flex;
+    border-radius: 12px;
+}
+main .card .card__img, main .card .card__content {
+    width: 50%;
+}
+main .card .card__img picture {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+main .card .card__img picture img {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px 0px 0px 12px;
+}
+
+main .card .card__content {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 18px;
+}
+main .card .card__content .card__tag {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 14px;
+    color: var(--dark-grayish-blue);
+}
+main .card .card__content .card__title {
+    font-family: 'Fraunces', serif;
+    text-transform: capitalize;
+}
+main .card .card__content .card__desc {
+    font-size: 14px;
+    color: var(--dark-grayish-blue);
+    line-height: 24px;
+}
+main .card .card__content .card__price {
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+}
+main .card .card__content .card__price h1 {
+    color: var(--dark-cyan);
+    font-family: 'Fraunces', serif;
+}
+main .card .card__content .card__price s {
+    font-size: 14px;
+    color: var(--dark-grayish-blue);
+}
+main .card .card__content .card__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 10px;
+    background-color: var(--dark-cyan);
+    padding: 14px;
+    outline: none;
+    border: 0;
+    border-radius: 10px;
+    color: var(--white);
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 200ms linear;
+}
+main .card .card__content .card__btn:hover {
+    background-color: var(--very-dark-blue);
+}
+
+@media (max-width: 600px) {
+    body {
+        height: auto;
+    }
+    main {
+        padding: 20px;
+    }
+    main .card {
+        flex-direction: column;
+    }
+    main .card .card__img, main .card .card__content {
+        width: 100%;
+    }
+    main .card .card__img picture img {
+        border-radius: 12px 12px 0px 0px;
+    }
+    main .card .card__content {
+        padding: 20px;
+        row-gap: 16px;
+    }
+}
+    </style>
+</head>
+<body>
+     <!--header-->
+     <header class="header">
+        <div class="header-1">
+          <a href="index.html" class="logo"><i class="fas fa-book"></i>Bookily</a>
+          <form action="" class="search-form">
+            <input
+              type="search"
+              name=""
+              placeholder="search here..."
+              id="search-box"
+            />
+            <label for="search-box" class="fas fa-search"></label>
+          </form>
+  
+          <div class="icons">
+            <div id="search-btn" class="fas fa-search"></div>
+            <a id="cart" class="fas fa-shopping-cart"></a>
+            <span class="cart-quantity">0</span>
+            <a href="" class="fas fa-heart"></a>
+            <div id="login-btn" class="fas fa-user"></div>
+          </div>
+        </div>
+  
+        <!-- <div class="header-2"> -->
+          <!-- <nav class="navbar"> -->
+            <!-- <a href="#home">Home</a> -->
+            <!-- <a href="#arrivals">Arrivals</a> -->
+            <!-- <a href="#featured">Featured</a> -->
+            <!-- <a href="blog.html">Blogs</a> -->
+            <!-- <a href="new_add.html">Contact</a> -->
+          <!-- </nav> -->
+        <!-- </div> -->
+      </header>
+    <main>
+        <div class="card">
+            <div class="card__img">
+                <picture>
+                    <source media="(min-width:600px)" srcset="">
+                    <img src="../images/same_size/book2.jpg" alt="">
+                </picture>
+            </div>
+            <div class="card__content">
+                <p class="card__tag">Manga</p>
+                <h1 class="card__title">Attack On Titan</h1>
+                <p class="card__desc">A floral, solar and voluptuous interpretation composed by Olivier Polge, Perfumer-Creator for the House of CHANEL.</p>
+                <div class="card__price">
+                    <h1>$149.99</h1>
+                    <s>$169.99</s>
+                </div>
+                <button class="card__btn">
+                    <img src="https://rvs-product-preview-card-component.vercel.app/images/icon-cart.svg" alt="">
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+    </main>
+
+     <!-- footer starts here -->
+     <section class="footer">
+        <div class="box-container">
+
+
+          <div class="box">
+
+            <h3>our locations</h3>
+            <a href="#"><i class="fas fa-plane"></i>India</a>
+            <a href="#"><i class="fas fa-plane"></i>America</a>
+            <a href="#"><i class="fas fa-plane"></i>Russia</a>
+            <a href="#"><i class="fas fa-plane"></i>france</a>
+            <a href="#"><i class="fas fa-plane"></i>japan</a>
+          </div>
+
+          <div class="box">
+
+            <h3>links</h3>
+            <a href="#"><i class="fas fa-arrow-right"></i>home</a>
+            <a href="#"><i class="fas fa-arrow-right"></i>featured</a>
+            <a href="#"><i class="fas fa-arrow-right"></i>arrivals</a>
+            <a href="#"><i class="fas fa-arrow-right"></i>Reviews</a>
+            <a href="../project2.0/blog.html"><i class="fas fa-arrow-right"></i>blogs</a>
+
+          </div>
+
+          
+          <div class="box">
+            <h3>extra links</h3>
+            <a href="#"><i class="fas fa-arrow-right"></i>account info</a>
+            <a href="#"><i class="fas fa-arrow-right"></i>ordered items</a>
+            <a href="#"><i class="fas fa-arrow-right"></i>privacy policy</a>
+            <!-- <a href="#"><i class="fas fa-arrow-right"></i>payment method</a> -->
+            <a href="#"><i class="fas fa-arrow-right"></i>our services</a>
+
+          </div>
+
+          <div class="box">
+
+            <h3>contact info</h3>
+            <a href="#"><i class="fas fa-phone"></i>+123-45</a>
+            <a href="#"><i class="fas fa-phone"></i>+111-222</a>
+            <a href="#"><i class="fas fa-envelope"></i>iybooks</a>
+            <!-- <img src="../images/images/5vpTg.png " class="map"> -->
+            
+
+          </div>
+
+          
+
+         
+
+        </div>
+        <div class="share">
+            <a href="#"class="fab fa-facebook"></a>
+            <a href="#"class="fab fa-twitter"></a>
+            <a href="#"class="fab fa-instagram"></a>
+            <a href="#"class="fab fa-linkedin"></a>
+            <a href="#"class="fab fa-pinterest"></a>
+          </div>
+      </section>
+
+    
+</body>
+</html>
